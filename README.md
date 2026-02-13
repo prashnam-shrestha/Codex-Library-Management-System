@@ -4,9 +4,7 @@
 
 A pure Java console application for managing library inventories and book checkouts. Built from scratch to practice core Object-Oriented Programming (OOP) concepts.
 
-<img width="470" height="445" alt="Screenshot 2026-02-13 at 19 42 52" src="https://github.com/user-attachments/assets/481af79b-beae-4b24-b12e-775a44a541f9" />
-<img width="910" height="598" alt="Screenshot 2026-02-13 at 19 43 43" src="https://github.com/user-attachments/assets/35ae318f-cf1e-4043-8137-0814192c1248" />
-
+![demoCodex](https://github.com/user-attachments/assets/1756d769-ec49-4cd7-8e9d-b292d536de61)
 
 ## Features
 * **Role-Based Access:** Separate menus and logic for Admins (manage inventory) and Users (borrow/return books).
