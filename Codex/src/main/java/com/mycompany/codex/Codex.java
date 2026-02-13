@@ -17,7 +17,7 @@ public class Codex {
         // Main file to run program
         
         // new Library by default
-        Library lib = new Library("Prashnam library", "Sunnyday2008");
+        Library lib = new Library("Prashnam library", "demoPassword1234");
         
         Scanner sc = new Scanner(System.in);
         
