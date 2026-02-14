@@ -12,6 +12,7 @@ import java.util.Scanner;
  * @author prashnamshrestha
  */
 public class Codex {
+    public static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         // Main file to run program
@@ -19,15 +20,12 @@ public class Codex {
         // new Library by default
         Library lib = new Library("Prashnam library", "demoPassword1234");
         
-        Scanner sc = new Scanner(System.in);
-        
         boolean exit = false;
         do {
             
             printMenuMain(lib);
             System.out.print("\n👉 Enter your choice: ");
-            int choiceMainMenu = sc.nextInt();
-            sc.nextLine();
+            int choiceMainMenu = getValidInt();
             
             switch(choiceMainMenu) {
                 // Login
@@ -47,7 +45,7 @@ public class Codex {
                 case 2:
                     printMenuRegister();
                     System.out.print("\n👉 Enter your choice: ");
-                    int choiceRegisterMain = sc.nextInt();
+                    int choiceRegisterMain = getValidInt();
                     
                     if (choiceRegisterMain == 1) {
                         registerNewUser(lib);
@@ -69,9 +67,7 @@ public class Codex {
             }
                 
         } while(!exit);
-        
-         sc.close();
-            
+                    
     }
 
     // Other functions
@@ -96,7 +92,7 @@ public class Codex {
     
     public static void printMenuUser(User user) {
         System.out.println("\n=======================================================");
-        System.out.printf("               👋 Welcome, Member: %-18s \n", user.getUserId());
+        System.out.printf("               👋 Welcome, Member: %-18s \n", user.getMemberId());
         System.out.println("=======================================================");
         System.out.println("     [1] Search Book Catalog");
         System.out.println("     [2] Borrow a Book");
@@ -108,7 +104,7 @@ public class Codex {
     
     public static void printMenuAdmin(Admin admin) {
         System.out.println("\n=======================================================");
-        System.out.printf("            🛠️ Welcome, Administrator: %-13s \n", admin.getAdminId());
+        System.out.printf("            🛠️ Welcome, Administrator: %-13s \n", admin.getMemberId());
         System.out.println("=======================================================");
         System.out.println("     [1] Add New Book");
         System.out.println("     [2] Remove Book");
@@ -120,7 +116,6 @@ public class Codex {
     }
     
     public static void registerNewAdmin(Library lib) {
-        Scanner sc = new Scanner(System.in);
         
         System.out.print("\n🔐 Enter Master Library Password: ");
         String password = sc.nextLine();
@@ -145,7 +140,6 @@ public class Codex {
     }
     
     public static void registerNewUser(Library lib) {
-            Scanner sc = new Scanner(System.in);
 
             System.out.print("\n👤 Enter new User Username: ");
             String newUserId = sc.nextLine();
@@ -166,7 +160,7 @@ public class Codex {
         
         // Checking admin
         for (Admin a: registeredAdmins) {
-            if (a.getAdminId().equals(loginId) && a.getPassword().equals(loginPassword)) {
+            if (a.getMemberId().equals(loginId) && a.getMemberPass().equals(loginPassword)) {
                 
                 boolean logOut = false;
                 while (!logOut) {
@@ -179,7 +173,7 @@ public class Codex {
         }
         
         for (User u: registeredUsers) {
-            if (u.getUserId().equals(loginId) && u.getPassword().equals(loginPassword)) {
+            if (u.getMemberId().equals(loginId) && u.getMemberPass().equals(loginPassword)) {
                 
                 boolean logOut = false;
                 while (!logOut) {
@@ -195,12 +189,10 @@ public class Codex {
     }
     
     public static boolean adminHomePage(Admin admin1, Library lib) {
-        Scanner sc = new Scanner(System.in);
         
         printMenuAdmin(admin1);
         System.out.print("\n👉 Enter your choice: ");
-        int choiceAdminHomePage = sc.nextInt();
-        sc.nextLine();
+        int choiceAdminHomePage = getValidInt();
         
         switch(choiceAdminHomePage) {
             
@@ -213,8 +205,7 @@ public class Codex {
                 String authorName = sc.nextLine();
                 
                 System.out.print("🔢 Enter Number of Copies: ");
-                int howMany = sc.nextInt();
-                sc.nextLine();
+                int howMany = getValidInt();
                 
                 Book bookNew = new Book(bookName, authorName, lib);
                 
@@ -225,11 +216,11 @@ public class Codex {
             // Remove book
             case 2:
                     System.out.printf("\n🆔 Enter Book ID to remove: ");
-                    int bookIdDelete = sc.nextInt();
-                    sc.nextLine();
+                    int bookIdDelete = getValidInt();
+                    
                     boolean notFound = true;
                     
-                    for (Book b: lib.inventory) {
+                    for (Book b: lib.getInventory()) {
                         if ((b.getIdOfBook() == bookIdDelete) && (b.getStatusOfBook() == Status.BORROWED)) {
                             System.out.println("\n❌ Cannot remove a book that is currently checked out!");
                             notFound = false;
@@ -250,11 +241,10 @@ public class Codex {
             // Update
             case 3:
                 System.out.printf("\n🆔 Enter Book ID to update: ");
-                int bookIdUpdate = sc.nextInt();
-                sc.nextLine();
+                int bookIdUpdate = getValidInt();
                 boolean notFound3 = true;
                 
-                for (Book b: lib.inventory) {
+                for (Book b: lib.getInventory()) {
                     if ((b.getIdOfBook() == bookIdUpdate) && (b.getStatusOfBook() != Status.BORROWED)) {
                         
                         System.out.printf("\n🏷️ Enter new Book title: ");
@@ -267,6 +257,7 @@ public class Codex {
                     }
                     if ((b.getIdOfBook() == bookIdUpdate) && (b.getStatusOfBook() == Status.BORROWED)) {
                         System.out.println("\n❌ Cannot update a book that is currently checked out!");
+                        notFound3 = false;
                         break;
                     }
                 }
@@ -299,12 +290,10 @@ public class Codex {
     }
     
     public static boolean userHomePage(User u, Library lib) {
-        Scanner sc = new Scanner(System.in);
         
         printMenuUser(u);
         System.out.print("\n👉 Enter your choice: ");
-        int choiceUserHomePage = sc.nextInt();
-        sc.nextLine();
+        int choiceUserHomePage = getValidInt();
         
         switch(choiceUserHomePage) {
             
@@ -319,8 +308,7 @@ public class Codex {
             // Check out;
             case 2:
                 System.out.print("\n📖 Enter Book ID to borrow: ");
-                int borrowId = sc.nextInt();
-                sc.nextLine();
+                int borrowId = getValidInt();
                 
                 lib.checkOutBook(borrowId, u);
                 break;
@@ -328,8 +316,7 @@ public class Codex {
             // Return book
             case 3:
                 System.out.print("\n↩️ Enter Book ID to return: ");
-                int returnId = sc.nextInt();
-                sc.nextLine();
+                int returnId = getValidInt();
                 
                 lib.checkInBook(returnId, u);
                 break;
@@ -350,4 +337,19 @@ public class Codex {
         // No logout if !case5;
         return false; 
     }
+    
+    public static int getValidInt() {
+        while (true) {
+            try {
+                int choice = sc.nextInt();
+                sc.nextLine();
+                return choice;
+            }
+            catch (Exception error) {
+                System.out.printf("\n❌ Invalid! Please try again: ");    
+                sc.nextLine();
+            }
+        }
+    }
+    
 }

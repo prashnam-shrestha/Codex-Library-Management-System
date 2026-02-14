@@ -8,34 +8,19 @@ package com.mycompany.codex;
  *
  * @author prashnamshrestha
  */
-public class Admin {
-    private String adminId;
-    private String password;
+public class Admin extends Members{
     
-    public Admin(String adminId, String password) {
-        setAdminId(adminId);
-        setPassword(password);
-    }
-
-    public String getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public Admin(String memberId, String memberPass) {
+        super(memberId, memberPass);
     }
     
     public void getInfo() {
         System.out.println("  ┌────────────────────────────────────────────────────────┐");
-        System.out.printf("  │ 🛡️ Admin ID: %-13s │ 🔑 Password: %-14s │\n", getAdminId(), getPassword());
+        System.out.printf("  │ 🛡️ Admin ID: %-13s │ 🔑 Password: %-14s │\n",
+                getMemberId(),
+                getMemberPass()
+        );
         System.out.println("  └────────────────────────────────────────────────────────┘");
+
     }
 }

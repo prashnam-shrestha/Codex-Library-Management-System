@@ -20,11 +20,11 @@ public class Library {
     private String passswordAdmin;
     
     // Storage for Books
-    ArrayList<Book> inventory = new ArrayList<>();
+    private ArrayList<Book> inventory = new ArrayList<>();
     
     // Registered Users and Admins
-    ArrayList<User> registeredUsers = new ArrayList<>();
-    ArrayList<Admin> registeredAdmins = new ArrayList<>();
+    private ArrayList<User> registeredUsers = new ArrayList<>();
+    private ArrayList<Admin> registeredAdmins = new ArrayList<>();
     
     // Constructor
     public Library(String name, String password) {
@@ -166,7 +166,7 @@ public class Library {
     // Check In
     
     public void checkInBook(int ID, User user) {
-        for (Book b: user.userPocket) {
+        for (Book b: user.getUserPocket()) {
             if (b.getIdOfBook() == ID) {
                 b.changeStatusOfBook(Status.AVAILABLE);
                 user.removeBookPocket(b);
@@ -179,9 +179,8 @@ public class Library {
     // Update book
     public void updateBook(Book b, String newTitle, String newAuthor) {
                 
-        inventory.remove(b);
-        Book book1 = new Book(newTitle, newAuthor, this);
-        inventory.add(book1);
+        b.setTitleOfBook(newTitle);
+        b.setAuthorOfBook(newAuthor);
             
     }
 
