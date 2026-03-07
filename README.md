@@ -15,8 +15,12 @@ A pure Java console application for managing library inventories and book checko
 * **Clean UI:** Polished, easily readable terminal interface.
 
 ## How to Run
-1. Clone this repository.
+1. Clone this repository. (Find link at the end)
 2. Open the project in your Java IDE and run `Codex.java`.
 3. **Admin Master Password** (for first-time admin registration): `demoPassword1234`
 
 All core Java logic, object-oriented design, and architecture were 100% hand-coded by me. I used Gemini strictly as a formatting tool to help generate the ASCII art borders and emoji layouts for the terminal UI.
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/prashnam-shrestha/Codex-Library-Management-System.git
